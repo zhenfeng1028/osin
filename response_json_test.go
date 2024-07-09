@@ -24,13 +24,13 @@ func TestResponseJSON(t *testing.T) {
 		t.Fatalf("Error outputting json: %s", err)
 	}
 
-	//fmt.Printf("%d - %s - %+v", w.Code, w.Body.String(), w.HeaderMap)
+	// fmt.Printf("%d - %s - %+v", w.Code, w.Body.String(), w.Header())
 
 	if w.Code != 200 {
 		t.Fatalf("Invalid response code for output: %d", w.Code)
 	}
 
-	if w.HeaderMap.Get("Content-Type") != "application/json" {
+	if w.Header().Get("Content-Type") != "application/json" {
 		t.Fatalf("Result from json must be application/json")
 	}
 
@@ -66,13 +66,13 @@ func TestErrorResponseJSON(t *testing.T) {
 		t.Fatalf("Error outputting json: %s", err)
 	}
 
-	//fmt.Printf("%d - %s - %+v", w.Code, w.Body.String(), w.HeaderMap)
+	// fmt.Printf("%d - %s - %+v", w.Code, w.Body.String(), w.Header())
 
 	if w.Code != 500 {
 		t.Fatalf("Invalid response code for error output: %d", w.Code)
 	}
 
-	if w.HeaderMap.Get("Content-Type") != "application/json" {
+	if w.Header().Get("Content-Type") != "application/json" {
 		t.Fatalf("Result from json must be application/json")
 	}
 
@@ -103,13 +103,13 @@ func TestRedirectResponseJSON(t *testing.T) {
 		t.Fatalf("Error outputting json: %s", err)
 	}
 
-	//fmt.Printf("%d - %s - %+v", w.Code, w.Body.String(), w.HeaderMap)
+	// fmt.Printf("%d - %s - %+v", w.Code, w.Body.String(), w.Header())
 
 	if w.Code != 302 {
 		t.Fatalf("Invalid response code for redirect output: %d", w.Code)
 	}
 
-	if w.HeaderMap.Get("Location") != "http://localhost:14000" {
-		t.Fatalf("Invalid response location url: %s", w.HeaderMap.Get("Location"))
+	if w.Header().Get("Location") != "http://localhost:14000" {
+		t.Fatalf("Invalid response location url: %s", w.Header().Get("Location"))
 	}
 }

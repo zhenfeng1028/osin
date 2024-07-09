@@ -34,7 +34,7 @@ func ParseUrls(baseUrl, redirectUrl string) (retBaseUrl, retRedirectUrl *url.URL
 
 	// must not have fragment
 	if base.Fragment != "" || redirect.Fragment != "" {
-		return nil, nil, newUriValidationError("url must not include fragment.", baseUrl, redirectUrl)
+		return nil, nil, newUriValidationError("url must not include fragment", baseUrl, redirectUrl)
 	}
 
 	// Scheme must match
@@ -102,7 +102,7 @@ func ValidateUriList(baseUriList string, redirectUri string, separator string) (
 // ValidateUri validates that redirectUri is contained in baseUri
 func ValidateUri(baseUri string, redirectUri string) (realRedirectUri string, err error) {
 	if baseUri == "" || redirectUri == "" {
-		return "", errors.New("urls cannot be blank.")
+		return "", errors.New("urls cannot be blank")
 	}
 
 	base, redirect, err := ParseUrls(baseUri, redirectUri)

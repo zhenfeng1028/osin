@@ -5,6 +5,46 @@ import (
 	"testing"
 )
 
+func TestURIValidateSingle(t *testing.T) {
+	valid := struct {
+		name              string
+		clientRedirectURI string
+		inputRedirectURI  string
+		normalized        string
+	}{
+		"No port in IPv6 loopback address",
+		"http://127.0.0.1/callback",
+		"http://[0:0:0:0:0:0:0:1]/callback",
+		"http://[0:0:0:0:0:0:0:1]/callback",
+	}
+
+	t.Run(fmt.Sprintf("valid/%s", valid.name), func(t *testing.T) {
+		if realRedirectUri, err := ValidateUri(valid.clientRedirectURI, valid.inputRedirectURI); err != nil {
+			t.Errorf("Expected ValidateUri(%s, %s) to succeed, got %v", valid.clientRedirectURI, valid.inputRedirectURI, err)
+		} else if realRedirectUri != valid.normalized {
+			t.Errorf("Expected ValidateUri(%s, %s) to return uri %s, got %s", valid.clientRedirectURI, valid.inputRedirectURI, valid.normalized, realRedirectUri)
+		}
+	})
+}
+
+func TestURIInvalidateSingle(t *testing.T) {
+	invalid := struct {
+		name              string
+		clientRedirectURI string
+		inputRedirectURI  string
+	}{
+		"Invalid input redirect URI",
+		"http://127.0.0.1/callback",
+		"http://127.0.0.1:abc/callback",
+	}
+
+	t.Run(fmt.Sprintf("invalid/%s", invalid.name), func(t *testing.T) {
+		if _, err := ValidateUri(invalid.clientRedirectURI, invalid.inputRedirectURI); err == nil {
+			t.Errorf("Expected ValidateUri(%s, %s) to fail", invalid.clientRedirectURI, invalid.inputRedirectURI)
+		}
+	})
+}
+
 func TestURIValidate(t *testing.T) {
 	valid := []struct {
 		name              string

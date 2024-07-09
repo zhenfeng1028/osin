@@ -61,7 +61,7 @@ type ServerConfig struct {
 	// If blank (the default), don't allow multiple URIs.
 	RedirectUriSeparator string
 
-	// RetainTokenAfter Refresh allows the server to retain the access and
+	// RetainTokenAfterRefresh allows the server to retain the access and
 	// refresh token for re-use - default false
 	RetainTokenAfterRefresh bool
 }

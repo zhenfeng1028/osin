@@ -31,7 +31,7 @@ func TestAccessAuthorizationCode(t *testing.T) {
 		server.FinishAccessRequest(resp, req, ar)
 	}
 
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if resp.IsError && resp.InternalError != nil {
 		t.Fatalf("Error in response: %s", resp.InternalError)
@@ -77,7 +77,7 @@ func TestAccessRefreshToken(t *testing.T) {
 		ar.Authorized = true
 		server.FinishAccessRequest(resp, req, ar)
 	}
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if _, err := server.Storage.LoadRefresh("r9999"); err == nil {
 		t.Fatalf("token was not deleted")
@@ -128,7 +128,7 @@ func TestAccessRefreshTokenSaveToken(t *testing.T) {
 		ar.Authorized = true
 		server.FinishAccessRequest(resp, req, ar)
 	}
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if _, err := server.Storage.LoadRefresh("r9999"); err != nil {
 		t.Fatalf("token incorrectly deleted: %s", err.Error())
@@ -180,7 +180,7 @@ func TestAccessPassword(t *testing.T) {
 		server.FinishAccessRequest(resp, req, ar)
 	}
 
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if resp.IsError && resp.InternalError != nil {
 		t.Fatalf("Error in response: %s", resp.InternalError)
@@ -226,7 +226,7 @@ func TestAccessClientCredentials(t *testing.T) {
 		server.FinishAccessRequest(resp, req, ar)
 	}
 
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if resp.IsError && resp.InternalError != nil {
 		t.Fatalf("Error in response: %s", resp.InternalError)
@@ -269,7 +269,6 @@ func TestExtraScopes(t *testing.T) {
 	if extraScopes("", "a") == false {
 		t.Fatalf("extraScopes returned false with extra scopes")
 	}
-
 }
 
 // clientWithoutMatcher just implements the base Client interface
@@ -358,7 +357,7 @@ type clientWithMatcher struct {
 }
 
 func (c *clientWithMatcher) GetId() string            { return c.Id }
-func (c *clientWithMatcher) GetSecret() string        { panic("called GetSecret"); return "" }
+func (c *clientWithMatcher) GetSecret() string        { panic("called GetSecret") }
 func (c *clientWithMatcher) GetRedirectUri() string   { return c.RedirectUri }
 func (c *clientWithMatcher) GetUserData() interface{} { return nil }
 func (c *clientWithMatcher) ClientSecretMatches(secret string) bool {

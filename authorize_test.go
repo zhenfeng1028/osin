@@ -28,7 +28,7 @@ func TestAuthorizeCode(t *testing.T) {
 		server.FinishAuthorizeRequest(resp, req, ar)
 	}
 
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if resp.IsError && resp.InternalError != nil {
 		t.Fatalf("Error in response: %s", resp.InternalError)
@@ -69,7 +69,7 @@ func TestAuthorizeToken(t *testing.T) {
 		server.FinishAuthorizeRequest(resp, req, ar)
 	}
 
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if resp.IsError && resp.InternalError != nil {
 		t.Fatalf("Error in response: %s", resp.InternalError)
@@ -208,7 +208,7 @@ func TestAuthorizeCodePKCEPlain(t *testing.T) {
 		server.FinishAuthorizeRequest(resp, req, ar)
 	}
 
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if resp.IsError && resp.InternalError != nil {
 		t.Fatalf("Error in response: %s", resp.InternalError)
@@ -264,7 +264,7 @@ func TestAuthorizeCodePKCES256(t *testing.T) {
 		server.FinishAuthorizeRequest(resp, req, ar)
 	}
 
-	//fmt.Printf("%+v", resp)
+	// fmt.Printf("%+v", resp)
 
 	if resp.IsError && resp.InternalError != nil {
 		t.Fatalf("Error in response: %s", resp.InternalError)

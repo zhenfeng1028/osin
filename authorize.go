@@ -18,9 +18,7 @@ const (
 	PKCE_S256  = "S256"
 )
 
-var (
-	pkceMatcher = regexp.MustCompile("^[a-zA-Z0-9~._-]{43,128}$")
-)
+var pkceMatcher = regexp.MustCompile("^[a-zA-Z0-9~._-]{43,128}$")
 
 // Authorize request information
 type AuthorizeRequest struct {
@@ -153,7 +151,7 @@ func (s *Server) HandleAuthorizeRequest(w *Response, r *http.Request) *Authorize
 		w.InternalError = err
 		return nil
 	} else {
-		ret.RedirectUri =  realRedirectUri
+		ret.RedirectUri = realRedirectUri
 	}
 
 	w.SetRedirect(ret.RedirectUri)

@@ -7,8 +7,7 @@ import (
 )
 
 // AuthorizeTokenGenDefault is the default authorization token generator
-type AuthorizeTokenGenDefault struct {
-}
+type AuthorizeTokenGenDefault struct{}
 
 // GenerateAuthorizeToken generates a base64-encoded UUID code
 func (a *AuthorizeTokenGenDefault) GenerateAuthorizeToken(data *AuthorizeData) (ret string, err error) {
@@ -16,9 +15,8 @@ func (a *AuthorizeTokenGenDefault) GenerateAuthorizeToken(data *AuthorizeData) (
 	return base64.RawURLEncoding.EncodeToString([]byte(token)), nil
 }
 
-// AccessTokenGenDefault is the default authorization token generator
-type AccessTokenGenDefault struct {
-}
+// AccessTokenGenDefault is the default access token generator
+type AccessTokenGenDefault struct{}
 
 // GenerateAccessToken generates base64-encoded UUID access and refresh tokens
 func (a *AccessTokenGenDefault) GenerateAccessToken(data *AccessData, generaterefresh bool) (accesstoken string, refreshtoken string, err error) {

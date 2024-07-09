@@ -41,7 +41,7 @@ func CheckBasicAuth(r *http.Request) (*BasicAuth, error) {
 
 	s := strings.SplitN(r.Header.Get("Authorization"), " ", 2)
 	if len(s) != 2 || s[0] != "Basic" {
-		return nil, errors.New("Invalid authorization header")
+		return nil, errors.New("invalid authorization header")
 	}
 
 	b, err := base64.StdEncoding.DecodeString(s[1])
@@ -50,7 +50,7 @@ func CheckBasicAuth(r *http.Request) (*BasicAuth, error) {
 	}
 	pair := strings.SplitN(string(b), ":", 2)
 	if len(pair) != 2 {
-		return nil, errors.New("Invalid authorization message")
+		return nil, errors.New("invalid authorization message")
 	}
 
 	// Decode the client_id and client_secret pairs as per
@@ -82,7 +82,7 @@ func CheckBearerAuth(r *http.Request) *BearerAuth {
 		if (len(s) != 2 || strings.ToLower(s[0]) != "bearer") && token == "" {
 			return nil
 		}
-		//Use authorization header token only if token type is bearer else query string access token would be returned
+		// Use authorization header token only if token type is bearer else query string access token would be returned
 		if len(s) > 0 && strings.ToLower(s[0]) == "bearer" {
 			token = s[1]
 		}
@@ -94,7 +94,6 @@ func CheckBearerAuth(r *http.Request) *BearerAuth {
 // otherwise gets it from the header.
 // Sets an error on the response if no auth is present or a server error occurs.
 func (s Server) getClientAuth(w *Response, r *http.Request, allowQueryParams bool) *BasicAuth {
-
 	if allowQueryParams {
 		// Allow for auth without password
 		if _, hasSecret := r.Form["client_secret"]; hasSecret {
@@ -114,7 +113,7 @@ func (s Server) getClientAuth(w *Response, r *http.Request, allowQueryParams boo
 		return nil
 	}
 	if auth == nil {
-		s.setErrorAndLog(w, E_INVALID_REQUEST, errors.New("Client authentication not sent"), "get_client_auth=%s", "client authentication not sent")
+		s.setErrorAndLog(w, E_INVALID_REQUEST, errors.New("client authentication not sent"), "get_client_auth=%s", "client authentication not sent")
 		return nil
 	}
 	return auth
